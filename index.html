@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Itqan Studio — Des sites web faits comme il faut</title>
-<meta name="description" content="Itqan Studio conçoit des sites vitrines, complets et boutiques pour les commerces et projets qui s'installent loin de chez eux. Bilingue français / arabe, prix fixe, délai tenu.">
+<title id="pageTitle">Itqan Studio — Des sites web faits comme il faut</title>
+<meta id="metaDesc" name="description" content="Itqan Studio conçoit des sites vitrines, complets et boutiques pour les commerces et projets qui s'installent loin de chez eux. Bilingue français / arabe, prix fixe, délai tenu.">
 <meta name="theme-color" content="#0E241D">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpolygon fill='%23C9A24D' points='29.00,16.00 25.19,19.81 25.19,25.19 19.81,25.19 16.00,29.00 12.19,25.19 6.81,25.19 6.81,19.81 3.00,16.00 6.81,12.19 6.81,6.81 12.19,6.81 16.00,3.00 19.81,6.81 25.19,6.81 25.19,12.19'/%3E%3C/svg%3E">
 
@@ -13,21 +13,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ============================================================
-   TOKENS
-   ============================================================ */
 :root{
-  --ink:        #0E241D;   /* fond profond */
-  --panel:      #12332A;   /* panneaux sur fond profond */
-  --panel-2:    #163A30;   /* panneaux legerement plus clairs */
-  --cream:      #F6F1E7;   /* fond clair / texte sur fond profond */
-  --charcoal:   #1C1912;   /* texte sur fond clair */
-  --brass:      #C9A24D;   /* accent */
-  --brass-dim:  #9C7F42;   /* accent plus sombre, pour contraste sur clair */
-  --sage:       #9FBFAC;   /* texte secondaire sur fond profond */
+  --ink:        #0E241D;
+  --panel:      #12332A;
+  --panel-2:    #163A30;
+  --cream:      #F6F1E7;
+  --charcoal:   #1C1912;
+  --brass:      #C9A24D;
+  --brass-dim:  #9C7F42;
+  --sage:       #9FBFAC;
   --sage-dim:   #6E8C7B;
   --line-dark:  rgba(246,241,231,0.14);
   --line-light: rgba(28,25,18,0.12);
+  --arrow-shift: 6px;
 
   --font-display: 'Fraunces', Georgia, serif;
   --font-mono: 'Space Mono', 'Courier New', monospace;
@@ -42,6 +40,9 @@
 *,*::before,*::after{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+[dir="rtl"]{ --arrow-shift: -6px; }
+[dir="rtl"] .eyebrow{ letter-spacing:normal; }
 
 body{
   margin:0;
@@ -59,58 +60,36 @@ a{ color:inherit; }
 ul,ol{ margin:0; padding:0; list-style:none; }
 h1,h2,h3,h4,p{ margin:0; }
 
-:focus-visible{
-  outline:2px solid var(--brass);
-  outline-offset:3px;
-}
+:focus-visible{ outline:2px solid var(--brass); outline-offset:3px; }
 
 .skip-link{
-  position:absolute; left:-999px; top:0;
+  position:absolute; inset-inline-start:-999px; top:0;
   background:var(--brass); color:var(--ink);
   padding:0.75rem 1.25rem; z-index:200; font-weight:600;
 }
-.skip-link:focus{ left:1rem; top:1rem; }
+.skip-link:focus{ inset-inline-start:1rem; top:1rem; }
 
-.wrap{
-  max-width:var(--container);
-  margin:0 auto;
-  padding-left:var(--edge);
-  padding-right:var(--edge);
-}
+.wrap{ max-width:var(--container); margin:0 auto; padding-inline:var(--edge); }
 
 .eyebrow{
-  font-family:var(--font-mono);
-  font-size:0.72rem;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  color:var(--brass);
+  font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--brass);
 }
 section .eyebrow{ display:block; margin-bottom:0.9rem; }
 
-.section-cream .eyebrow{ color:var(--brass-dim); }
-
 h2.section-title{
-  font-family:var(--font-display);
-  font-weight:500;
-  font-size:clamp(1.75rem, 3.4vw, 2.6rem);
-  line-height:1.2;
-  max-width:20ch;
+  font-family:var(--font-display); font-weight:500;
+  font-size:clamp(1.75rem, 3.4vw, 2.6rem); line-height:1.2; max-width:24ch;
 }
 
 .reveal{ opacity:1; }
 .reveal.gsap-ready{ opacity:0; }
 
-/* ============================================================
-   BUTTONS
-   ============================================================ */
 .btn{
   display:inline-flex; align-items:center; gap:0.55rem;
   font-family:var(--font-body); font-weight:600; font-size:0.95rem;
-  padding:0.85rem 1.5rem;
-  border-radius:var(--radius-sm);
-  border:1.5px solid transparent;
-  cursor:pointer;
-  text-decoration:none;
+  padding:0.85rem 1.5rem; border-radius:var(--radius-sm);
+  border:1.5px solid transparent; cursor:pointer; text-decoration:none;
   transition:transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
   white-space:nowrap;
 }
@@ -119,43 +98,32 @@ h2.section-title{
 .btn-solid:hover{ background:#DCB566; }
 .btn-ghost{ background:transparent; border-color:var(--line-dark); color:var(--cream); }
 .btn-ghost:hover{ border-color:var(--brass); color:var(--brass); }
-.btn-ghost-dark{ background:transparent; border-color:var(--line-light); color:var(--charcoal); }
-.btn-ghost-dark:hover{ border-color:var(--brass-dim); color:var(--brass-dim); }
 .btn-sm{ padding:0.55rem 1rem; font-size:0.82rem; }
 
-/* ============================================================
-   NAV
-   ============================================================ */
+/* NAV */
 .nav{
   position:fixed; top:0; left:0; right:0; z-index:100;
-  padding:1.1rem 0;
-  background:transparent;
+  padding:1.1rem 0; background:transparent;
   transition:background 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
   border-bottom:1px solid transparent;
 }
 .nav.is-scrolled{
-  background:rgba(14,36,29,0.86);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  border-color:var(--line-dark);
-  padding:0.8rem 0;
+  background:rgba(14,36,29,0.86); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-color:var(--line-dark); padding:0.8rem 0;
 }
-.nav .wrap{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; }
-.brand{ display:flex; align-items:center; gap:0.6rem; text-decoration:none; }
+.nav .wrap{ display:flex; align-items:center; justify-content:space-between; gap:1.25rem; }
+.brand{ display:flex; align-items:center; gap:0.6rem; text-decoration:none; flex-shrink:0; }
 .brand-mark{ width:22px; height:22px; flex-shrink:0; }
 .brand-mark rect{ fill:none; stroke-width:2.6; }
 .brand-mark .sq1{ stroke:var(--cream); }
 .brand-mark .sq2{ stroke:var(--brass); }
-.brand-word{ font-family:var(--font-mono); font-size:0.85rem; letter-spacing:0.14em; color:var(--cream); }
+.brand-word{ font-family:var(--font-mono); font-size:0.85rem; letter-spacing:0.14em; color:var(--cream); white-space:nowrap; }
 .brand-word b{ color:var(--brass); font-weight:400; }
 
-.nav-links{ display:flex; align-items:center; gap:2rem; }
-.nav-links a{
-  font-size:0.88rem; text-decoration:none; color:var(--sage);
-  transition:color 0.18s ease;
-}
+.nav-links{ display:flex; align-items:center; gap:1.75rem; }
+.nav-links a{ font-size:0.88rem; text-decoration:none; color:var(--sage); transition:color 0.18s ease; white-space:nowrap; }
 .nav-links a:hover{ color:var(--cream); }
-.nav-actions{ display:flex; align-items:center; gap:1rem; }
+.nav-actions{ display:flex; align-items:center; gap:0.9rem; }
 .nav-toggle{
   display:none; background:none; border:none; color:var(--cream);
   width:36px; height:36px; cursor:pointer; padding:0;
@@ -167,77 +135,57 @@ h2.section-title{
 .nav-toggle span::before{ position:absolute; top:-7px; }
 .nav-toggle span::after{ position:absolute; top:7px; }
 
-@media (max-width:820px){
+/* Language selector */
+.lang-select{ position:relative; }
+.lang-select-trigger{
+  display:flex; align-items:center; gap:0.35rem;
+  background:transparent; border:1px solid var(--line-dark); border-radius:999px;
+  color:var(--cream); font-family:var(--font-mono); font-size:0.78rem;
+  padding:0.45rem 0.75rem; cursor:pointer; transition:border-color 0.18s ease;
+}
+.lang-select-trigger:hover{ border-color:var(--brass); }
+.lang-select-trigger .chevron{ font-size:0.65rem; color:var(--sage); transition:transform 0.2s ease; display:inline-block; }
+.lang-select.is-open .chevron{ transform:rotate(180deg); }
+.lang-menu{
+  position:absolute; top:calc(100% + 8px); inset-inline-end:0;
+  background:var(--panel); border:1px solid var(--line-dark); border-radius:var(--radius-md);
+  min-width:150px; padding:0.4rem; display:none; flex-direction:column; gap:0.15rem;
+  box-shadow:0 20px 40px -20px rgba(0,0,0,0.6); z-index:50; margin:0;
+}
+.lang-select.is-open .lang-menu{ display:flex; }
+.lang-menu li{
+  padding:0.55rem 0.75rem; border-radius:6px; font-size:0.88rem; color:var(--cream);
+  cursor:pointer; transition:background 0.15s ease;
+}
+.lang-menu li:hover{ background:var(--panel-2); }
+.lang-menu li[aria-selected="true"]{ color:var(--brass); }
+
+@media (max-width:860px){
   .nav-links{ display:none; }
   .nav-toggle{ display:block; }
 }
 
-/* ============================================================
-   HERO
-   ============================================================ */
-.hero{
-  position:relative;
-  min-height:100vh;
-  display:flex; align-items:center;
-  padding-top:6rem; padding-bottom:4rem;
-  overflow:hidden;
-}
-.star-parallax{
-  position:absolute; inset:-20%;
-  z-index:0;
-  will-change:transform;
-}
-.star-field{
-  width:100%; height:100%;
-  animation:starDrift 70s linear infinite;
-}
-@keyframes starDrift{
-  from{ transform:translate(0,0); }
-  to{ transform:translate(-140px,-140px); }
-}
-@media (prefers-reduced-motion: reduce){
-  .star-field{ animation:none; }
-}
+/* HERO */
+.hero{ position:relative; min-height:100vh; display:flex; align-items:center; padding-top:6rem; padding-bottom:4rem; overflow:hidden; }
+.star-parallax{ position:absolute; inset:-20%; z-index:0; will-change:transform; }
+.star-field{ width:100%; height:100%; animation:starDrift 70s linear infinite; }
+@keyframes starDrift{ from{ transform:translate(0,0); } to{ transform:translate(-140px,-140px); } }
+@media (prefers-reduced-motion: reduce){ .star-field{ animation:none; } }
 .hero::after{
-  content:'';
-  position:absolute; inset:0; z-index:1;
+  content:''; position:absolute; inset:0; z-index:1;
   background:radial-gradient(ellipse 70% 55% at 30% 40%, transparent 0%, var(--ink) 78%);
   pointer-events:none;
 }
-
-.hero .wrap{
-  position:relative; z-index:2;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(280px,380px);
-  gap:3rem;
-  align-items:center;
-}
+.hero .wrap{ position:relative; z-index:2; display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,380px); gap:3rem; align-items:center; }
 @media (max-width:900px){
   .hero .wrap{ grid-template-columns:1fr; }
   .hero-visual{ order:-1; margin:0 auto; width:min(70vw,280px); }
 }
-
 .hero-copy .eyebrow{ margin-bottom:1.2rem; }
-.hero-copy h1{
-  font-family:var(--font-display);
-  font-weight:500;
-  font-size:clamp(2.4rem, 5.6vw, 4.2rem);
-  line-height:1.06;
-  letter-spacing:-0.01em;
-  max-width:14ch;
-}
-.hero-copy h1 em{
-  font-style:italic; color:var(--brass); font-weight:500;
-}
-.hero-copy p.lede{
-  margin-top:1.6rem;
-  font-size:1.08rem;
-  line-height:1.7;
-  color:var(--sage);
-  max-width:44ch;
-}
+.hero-copy h1{ font-family:var(--font-display); font-weight:500; font-size:clamp(2.4rem, 5.6vw, 4.2rem); line-height:1.06; letter-spacing:-0.01em; }
+.hero-copy h1 em{ font-style:italic; color:var(--brass); font-weight:500; }
+.hero-copy p.lede{ margin-top:1.6rem; font-size:1.08rem; line-height:1.7; color:var(--sage); max-width:46ch; }
 .hero-actions{ display:flex; gap:1rem; margin-top:2.4rem; flex-wrap:wrap; }
-
 .hero-visual{ position:relative; aspect-ratio:1; }
 .hero-visual svg{ width:100%; height:100%; overflow:visible; }
 .sq1,.sq2{ fill:none; }
@@ -245,259 +193,142 @@ h2.section-title{
 .sq2{ stroke:var(--brass); stroke-width:3; }
 .lock-flash{ fill:var(--brass); opacity:0; }
 
-/* ============================================================
-   PROBLEM / STATEMENT
-   ============================================================ */
-.statement{
-  padding:6rem 0;
-  border-top:1px solid var(--line-dark);
-  border-bottom:1px solid var(--line-dark);
-}
-.statement .wrap{
-  display:grid; grid-template-columns:1fr 1fr; gap:3rem;
-}
+/* STATEMENT */
+.statement{ padding:6rem 0; border-top:1px solid var(--line-dark); border-bottom:1px solid var(--line-dark); }
+.statement .wrap{ display:grid; grid-template-columns:1fr 1fr; gap:3rem; }
 @media (max-width:800px){ .statement .wrap{ grid-template-columns:1fr; } }
-.statement blockquote{
-  font-family:var(--font-display);
-  font-style:italic;
-  font-weight:500;
-  font-size:clamp(1.5rem, 2.8vw, 2.1rem);
-  line-height:1.35;
-  color:var(--cream);
-  margin:0;
-}
+.statement blockquote{ font-family:var(--font-display); font-style:italic; font-weight:500; font-size:clamp(1.5rem, 2.8vw, 2.1rem); line-height:1.35; color:var(--cream); margin:0; }
 .statement .support{ display:flex; flex-direction:column; gap:1.4rem; align-self:end; }
-.statement .support p{ color:var(--sage); font-size:0.98rem; max-width:38ch; }
+.statement .support p{ color:var(--sage); font-size:0.98rem; max-width:40ch; }
 .statement .support p b{ color:var(--cream); font-weight:600; }
 
-/* ============================================================
-   OFFERS
-   ============================================================ */
+/* OFFERS */
 .offers{ padding:7rem 0; }
-.offers-head{
-  display:flex; justify-content:space-between; align-items:flex-end; gap:2rem;
-  margin-bottom:3.5rem; flex-wrap:wrap;
-}
-.offers-grid{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;
-}
+.offers-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; margin-bottom:3.5rem; flex-wrap:wrap; }
+.offers-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
 @media (max-width:900px){ .offers-grid{ grid-template-columns:1fr; } }
-
 .offer-card{
-  position:relative;
-  background:var(--panel);
-  border:1px solid var(--line-dark);
-  border-radius:var(--radius-md);
-  padding:2rem 1.75rem 1.75rem;
-  display:flex; flex-direction:column;
+  position:relative; background:var(--panel); border:1px solid var(--line-dark); border-radius:var(--radius-md);
+  padding:2rem 1.75rem 1.75rem; display:flex; flex-direction:column;
   transition:border-color 0.2s ease, transform 0.2s ease;
 }
 .offer-card:hover{ border-color:var(--brass-dim); transform:translateY(-4px); }
-.offer-card::before,.offer-card::after{
-  content:''; position:absolute; width:14px; height:14px; opacity:0.65;
-}
-.offer-card::before{ top:10px; left:10px; border-top:1.5px solid var(--brass); border-left:1.5px solid var(--brass); }
-.offer-card::after{ bottom:10px; right:10px; border-bottom:1.5px solid var(--brass); border-right:1.5px solid var(--brass); }
-
+.offer-card::before,.offer-card::after{ content:''; position:absolute; width:14px; height:14px; opacity:0.65; }
+.offer-card::before{ top:10px; inset-inline-start:10px; border-block-start:1.5px solid var(--brass); border-inline-start:1.5px solid var(--brass); }
+.offer-card::after{ bottom:10px; inset-inline-end:10px; border-block-end:1.5px solid var(--brass); border-inline-end:1.5px solid var(--brass); }
 .offer-card.is-featured{ background:var(--panel-2); border-color:var(--brass-dim); }
-
 .offer-head{ display:flex; align-items:baseline; gap:0.75rem; margin-bottom:0.75rem; flex-wrap:wrap; }
 .offer-index{ font-family:var(--font-mono); font-size:0.78rem; color:var(--brass); }
 .offer-head h3{ font-family:var(--font-display); font-size:1.4rem; font-weight:500; }
 .offer-tag{
-  font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.04em;
-  color:var(--brass); border:1px solid var(--brass-dim); border-radius:999px;
-  padding:0.2rem 0.6rem; margin-left:auto;
+  font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.04em; color:var(--brass);
+  border:1px solid var(--brass-dim); border-radius:999px; padding:0.2rem 0.6rem; margin-inline-start:auto;
 }
 .offer-desc{ color:var(--sage); font-size:0.94rem; margin-bottom:1.5rem; }
-
 .offer-list{ display:flex; flex-direction:column; gap:0.65rem; margin-bottom:auto; padding-bottom:2rem; }
-.offer-list li{
-  font-size:0.88rem; color:var(--cream);
-  padding-left:1.1rem; position:relative;
-}
+.offer-list li{ font-size:0.88rem; color:var(--cream); padding-inline-start:1.1rem; position:relative; }
 .offer-list li::before{
-  content:''; position:absolute; left:0; top:0.5em;
-  width:6px; height:6px; background:var(--brass); border-radius:1px;
-  transform:rotate(45deg);
+  content:''; position:absolute; inset-inline-start:0; top:0.5em;
+  width:6px; height:6px; background:var(--brass); border-radius:1px; transform:rotate(45deg);
 }
-
-.offer-foot{
-  border-top:1px solid var(--line-dark);
-  padding-top:1.25rem;
-  display:flex; justify-content:space-between; align-items:baseline;
-}
+.offer-foot{ border-top:1px solid var(--line-dark); padding-top:1.25rem; display:flex; justify-content:space-between; align-items:baseline; }
 .offer-price{ font-family:var(--font-mono); font-size:1.5rem; color:var(--cream); }
-.offer-price .offer-from{ font-size:0.7rem; color:var(--sage-dim); margin-right:0.35rem; vertical-align:middle; }
+.offer-price .offer-from{ font-size:0.7rem; color:var(--sage-dim); margin-inline-end:0.35rem; vertical-align:middle; }
 .offer-delay{ font-size:0.78rem; color:var(--sage-dim); }
+.offers-note{ margin-top:2rem; font-size:0.85rem; color:var(--sage-dim); border-inline-start:2px solid var(--brass-dim); padding-inline-start:1rem; }
 
-.offers-note{
-  margin-top:2rem; font-size:0.85rem; color:var(--sage-dim);
-  border-left:2px solid var(--brass-dim); padding-left:1rem;
-}
-
-/* ============================================================
-   METHOD
-   ============================================================ */
+/* METHOD */
 .method{ padding:7rem 0; background:var(--panel); }
-.method-grid{
-  display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;
-}
+.method-grid{ display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
 @media (max-width:800px){ .method-grid{ grid-template-columns:1fr; gap:3rem; } }
-
 .method-lede{ color:var(--sage); font-size:0.98rem; margin-top:1.2rem; max-width:36ch; }
 .method-list{ display:flex; flex-direction:column; }
-.method-step{
-  display:grid; grid-template-columns:3.2rem 1fr;
-  gap:1.25rem;
-  padding:1.6rem 0;
-  border-top:1px solid var(--line-dark);
-}
+.method-step{ display:grid; grid-template-columns:3.2rem 1fr; gap:1.25rem; padding:1.6rem 0; border-top:1px solid var(--line-dark); }
 .method-step:last-child{ border-bottom:1px solid var(--line-dark); }
 .step-num{ font-family:var(--font-mono); color:var(--brass); font-size:0.95rem; padding-top:0.15rem; }
 .method-step h3{ font-family:var(--font-display); font-size:1.15rem; font-weight:500; margin-bottom:0.4rem; }
 .method-step p{ color:var(--sage); font-size:0.92rem; }
 
-/* ============================================================
-   BILINGUAL / RTL DEMO
-   ============================================================ */
+/* BILINGUAL DEMO */
 .bilingual{ padding:7rem 0; }
-.bilingual-grid{
-  display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:center;
-}
+.bilingual-grid{ display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:center; }
 @media (max-width:900px){ .bilingual-grid{ grid-template-columns:1fr; } }
-
-.lang-switch{
-  display:inline-flex; border:1px solid var(--line-dark); border-radius:999px;
-  padding:0.25rem; margin-top:2rem; gap:0.25rem;
-}
+.lang-switch{ display:inline-flex; border:1px solid var(--line-dark); border-radius:999px; padding:0.25rem; margin-top:2rem; gap:0.25rem; }
 .lang-btn{
-  font-family:var(--font-body); font-size:0.85rem; font-weight:500;
-  padding:0.55rem 1.2rem; border-radius:999px; border:none;
-  background:transparent; color:var(--sage); cursor:pointer;
+  font-family:var(--font-body); font-size:0.85rem; font-weight:500; padding:0.55rem 1.2rem;
+  border-radius:999px; border:none; background:transparent; color:var(--sage); cursor:pointer;
   transition:background 0.2s ease, color 0.2s ease;
 }
 .lang-btn.is-active{ background:var(--brass); color:var(--ink); }
-
 .mock-browser{
-  background:var(--cream);
-  border-radius:var(--radius-md);
-  overflow:hidden;
-  box-shadow:0 30px 60px -30px rgba(0,0,0,0.5);
-  transition:transform 0.3s ease, opacity 0.2s ease;
+  background:var(--cream); border-radius:var(--radius-md); overflow:hidden;
+  box-shadow:0 30px 60px -30px rgba(0,0,0,0.5); transition:transform 0.3s ease, opacity 0.2s ease;
 }
 .mock-browser.is-flipping{ transform:scale(0.98); opacity:0.85; }
-.mock-chrome{
-  display:flex; gap:6px; padding:0.7rem 0.9rem; background:#E7E0D0;
-}
+.mock-chrome{ display:flex; gap:6px; padding:0.7rem 0.9rem; background:#E7E0D0; }
 .mock-chrome span{ width:9px; height:9px; border-radius:50%; background:rgba(28,25,18,0.18); }
 .mock-body{ padding:1.75rem; }
 .mock-nav{ display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; }
 .mock-logo{ width:22px; height:22px; background:var(--charcoal); border-radius:4px; }
 .mock-links{ display:flex; gap:0.9rem; }
 .mock-links span{ width:32px; height:6px; background:rgba(28,25,18,0.16); border-radius:3px; }
-.mock-hero h4{
-  font-family:var(--font-display); font-weight:500; font-size:1.5rem;
-  color:var(--charcoal); margin-bottom:0.6rem; text-align:start;
-}
+.mock-hero h4{ font-family:var(--font-display); font-weight:500; font-size:1.5rem; color:var(--charcoal); margin-bottom:0.6rem; text-align:start; }
 .mock-hero p{ color:#6B6455; font-size:0.92rem; margin-bottom:1.4rem; text-align:start; max-width:32ch; }
-.mock-cta{
-  font-family:var(--font-body); font-weight:600; font-size:0.85rem;
-  background:var(--charcoal); color:var(--cream);
-  border:none; padding:0.7rem 1.3rem; border-radius:var(--radius-sm); cursor:default;
-}
+.mock-cta{ font-family:var(--font-body); font-weight:600; font-size:0.85rem; background:var(--charcoal); color:var(--cream); border:none; padding:0.7rem 1.3rem; border-radius:var(--radius-sm); cursor:default; }
 [dir="rtl"] .mock-hero p{ max-width:none; }
-
 .bilingual-copy p{ color:var(--sage); margin-top:1.2rem; max-width:42ch; }
 
-/* ============================================================
-   WORK / REALISATIONS
-   ============================================================ */
+/* WORK */
 .work{ padding:7rem 0; background:var(--panel); }
-
 .portfolio-card{
-  position:relative; display:block;
-  margin-top:3rem;
-  background:var(--ink); border:1px solid var(--line-dark); border-radius:var(--radius-md);
-  padding:clamp(2rem,4vw,3.25rem);
-  text-decoration:none;
+  position:relative; display:block; margin-top:3rem; background:var(--ink);
+  border:1px solid var(--line-dark); border-radius:var(--radius-md);
+  padding:clamp(2rem,4vw,3.25rem); text-decoration:none;
   transition:transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 .portfolio-card:hover{ transform:translateY(-4px); border-color:var(--brass); background:var(--panel-2); }
-.portfolio-card::before,.portfolio-card::after{
-  content:''; position:absolute; width:16px; height:16px; opacity:0.7;
-}
-.portfolio-card::before{ top:12px; left:12px; border-top:1.5px solid var(--brass); border-left:1.5px solid var(--brass); }
-.portfolio-card::after{ bottom:12px; right:12px; border-bottom:1.5px solid var(--brass); border-right:1.5px solid var(--brass); }
+.portfolio-card::before,.portfolio-card::after{ content:''; position:absolute; width:16px; height:16px; opacity:0.7; }
+.portfolio-card::before{ top:12px; inset-inline-start:12px; border-block-start:1.5px solid var(--brass); border-inline-start:1.5px solid var(--brass); }
+.portfolio-card::after{ bottom:12px; inset-inline-end:12px; border-block-end:1.5px solid var(--brass); border-inline-end:1.5px solid var(--brass); }
 .portfolio-card-inner{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; }
-.portfolio-label{
-  display:block; font-family:var(--font-mono); font-size:0.75rem;
-  letter-spacing:0.1em; text-transform:uppercase; color:var(--sage-dim); margin-bottom:0.6rem;
-}
+.portfolio-label{ display:block; font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--sage-dim); margin-bottom:0.6rem; }
 .portfolio-url{ font-family:var(--font-display); font-weight:500; font-size:clamp(1.5rem,3.6vw,2.3rem); color:var(--cream); }
-.portfolio-arrow{ font-family:var(--font-mono); font-size:1.6rem; color:var(--brass); transition:transform 0.2s ease; }
-.portfolio-card:hover .portfolio-arrow{ transform:translateX(8px); }
+.portfolio-arrow{ font-family:var(--font-mono); font-size:1.6rem; color:var(--brass); transition:transform 0.2s ease; display:inline-block; }
+.portfolio-card:hover .portfolio-arrow{ transform:translateX(var(--arrow-shift)); }
 .work-note{ margin-top:1.25rem; color:var(--sage); font-size:0.92rem; }
 
-/* ============================================================
-   FAQ
-   ============================================================ */
+/* FAQ */
 .faq{ padding:7rem 0; max-width:760px; }
 .faq-list{ margin-top:2.5rem; display:flex; flex-direction:column; }
 .faq-item{ border-top:1px solid var(--line-dark); }
 .faq-item:last-child{ border-bottom:1px solid var(--line-dark); }
 .faq-item summary{
-  list-style:none; cursor:pointer;
-  display:flex; justify-content:space-between; align-items:center; gap:1rem;
+  list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:1rem;
   padding:1.4rem 0; font-family:var(--font-display); font-size:1.05rem; font-weight:500;
 }
 .faq-item summary::-webkit-details-marker{ display:none; }
-.faq-icon{
-  flex-shrink:0; width:20px; height:20px; position:relative;
-}
-.faq-icon::before,.faq-icon::after{
-  content:''; position:absolute; top:50%; left:50%; background:var(--brass);
-  transform:translate(-50%,-50%);
-}
+.faq-icon{ flex-shrink:0; width:20px; height:20px; position:relative; }
+.faq-icon::before,.faq-icon::after{ content:''; position:absolute; top:50%; left:50%; background:var(--brass); transform:translate(-50%,-50%); }
 .faq-icon::before{ width:12px; height:1.5px; }
 .faq-icon::after{ width:1.5px; height:12px; transition:transform 0.25s ease; }
 .faq-item[open] .faq-icon::after{ transform:translate(-50%,-50%) rotate(90deg); opacity:0; }
 .faq-item p{ color:var(--sage); font-size:0.94rem; padding-bottom:1.6rem; max-width:60ch; }
 
-/* ============================================================
-   CONTACT / FOOTER
-   ============================================================ */
-.contact{
-  padding:7rem 0 5rem;
-  text-align:center;
-  border-top:1px solid var(--line-dark);
-}
-.contact h2{
-  font-family:var(--font-display); font-weight:500;
-  font-size:clamp(2rem, 4vw, 3rem);
-  max-width:16ch; margin:0 auto 1.2rem;
-}
-.contact p{ color:var(--sage); max-width:40ch; margin:0 auto 2.2rem; }
+/* CONTACT / FOOTER */
+.contact{ padding:7rem 0 5rem; text-align:center; border-top:1px solid var(--line-dark); }
+.contact h2{ font-family:var(--font-display); font-weight:500; font-size:clamp(2rem, 4vw, 3rem); max-width:20ch; margin:0 auto 1.2rem; }
+.contact p{ color:var(--sage); max-width:42ch; margin:0 auto 2.2rem; }
 .contact-actions{ display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
-
-.site-footer{
-  border-top:1px solid var(--line-dark);
-  padding:2.5rem 0;
-}
-.site-footer .wrap{
-  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
-}
+.site-footer{ border-top:1px solid var(--line-dark); padding:2.5rem 0; }
+.site-footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
 .footer-copy{ font-size:0.8rem; color:var(--sage-dim); }
 .footer-tag{ font-family:var(--font-mono); font-size:0.75rem; color:var(--sage-dim); }
 </style>
 </head>
 <body>
 
-<a class="skip-link" href="#main">Aller au contenu</a>
+<a class="skip-link" href="#main" data-i18n="skip_link">Aller au contenu</a>
 
-<!-- ============================================================
-     NAV
-     ============================================================ -->
 <nav class="nav" id="siteNav">
   <div class="wrap">
     <a class="brand" href="#top">
@@ -508,13 +339,25 @@ h2.section-title{
       <span class="brand-word">ITQAN <b>STUDIO</b></span>
     </a>
     <div class="nav-links">
-      <a href="#offres">Offres</a>
-      <a href="#methode">Méthode</a>
-      <a href="#realisations">Réalisations</a>
-      <a href="#faq">FAQ</a>
+      <a href="#offres" data-i18n="nav_offers">Offres</a>
+      <a href="#methode" data-i18n="nav_method">Méthode</a>
+      <a href="#realisations" data-i18n="nav_work">Réalisations</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
     </div>
     <div class="nav-actions">
-      <a class="btn btn-solid btn-sm" href="https://wa.me/33000000000" target="_blank" rel="noopener">Écrire sur WhatsApp</a>
+      <div class="lang-select" id="langSelect">
+        <button class="lang-select-trigger" id="langTrigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span id="langCurrentLabel">FR</span>
+          <span class="chevron" aria-hidden="true">&#9662;</span>
+        </button>
+        <ul class="lang-menu" id="langMenu" role="listbox">
+          <li role="option" data-lang="fr" aria-selected="true">Français</li>
+          <li role="option" data-lang="en" aria-selected="false">English</li>
+          <li role="option" data-lang="ar" aria-selected="false">العربية</li>
+          <li role="option" data-lang="ru" aria-selected="false">Русский</li>
+        </ul>
+      </div>
+      <a class="btn btn-solid btn-sm" href="https://wa.me/33667727557" target="_blank" rel="noopener" data-i18n="nav_cta">Écrire sur WhatsApp</a>
       <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span>
       </button>
@@ -524,9 +367,6 @@ h2.section-title{
 
 <main id="main">
 
-<!-- ============================================================
-     HERO
-     ============================================================ -->
 <header class="hero" id="top">
   <div class="star-parallax" id="starParallax">
     <svg class="star-field" aria-hidden="true" width="100%" height="100%">
@@ -542,12 +382,15 @@ h2.section-title{
 
   <div class="wrap">
     <div class="hero-copy">
-      <span class="eyebrow">Sites web — français / عربي</span>
-      <h1 id="heroTitle">Deux carrés.<br>Un seul angle <em>juste</em>.</h1>
-      <p class="lede">As-salamu alaykum. Itqan Studio construit, bi idhnillah, des sites clairs et rapides pour les commerces et les projets qui s'installent loin de chez eux. Prix fixé avant de commencer, délai tenu — en français comme en arabe.</p>
+      <span class="eyebrow" data-i18n="hero_eyebrow">Sites web sur mesure</span>
+      <h1 id="heroTitle">
+        <span data-i18n="hero_title_1">Deux carrés.</span><br>
+        <span data-i18n="hero_title_2a">Un seul angle </span><em data-i18n="hero_title_2b">juste.</em>
+      </h1>
+      <p class="lede" data-i18n="hero_lede">As-salamu alaykum. Itqan Studio construit, bi idhnillah, des sites clairs et rapides pour les commerces et les projets qui s'installent loin de chez eux. Prix fixé avant de commencer, délai tenu — en français comme en arabe.</p>
       <div class="hero-actions">
-        <a class="btn btn-solid" href="https://wa.me/33000000000" target="_blank" rel="noopener">Demander un devis</a>
-        <a class="btn btn-ghost" href="#methode">Voir la méthode</a>
+        <a class="btn btn-solid" href="https://wa.me/33667727557" target="_blank" rel="noopener" data-i18n="hero_cta_primary">Demander un devis</a>
+        <a class="btn btn-ghost" href="#methode" data-i18n="hero_cta_secondary">Voir la méthode</a>
       </div>
     </div>
 
@@ -561,28 +404,22 @@ h2.section-title{
   </div>
 </header>
 
-<!-- ============================================================
-     STATEMENT
-     ============================================================ -->
 <section class="statement">
   <div class="wrap">
-    <blockquote class="reveal">« Un commerce qu'on ne trouve pas sur Google n'existe pas vraiment. »</blockquote>
+    <blockquote class="reveal" data-i18n="statement_quote">« Un commerce qu'on ne trouve pas sur Google n'existe pas vraiment. »</blockquote>
     <div class="support reveal">
-      <p>Beaucoup de nos frères et sœurs démarrent un projet loin de chez eux, sans réseau local, sans recommandations. <b>Un site clair peut remplacer, bi idhnillah, le bouche-à-oreille qu'on n'a pas encore.</b></p>
-      <p>Pas besoin d'un site compliqué. Besoin d'un site <b>qui inspire confiance</b> et qui fonctionne dès le premier jour, in sha Allah.</p>
+      <p><span data-i18n="statement_p1_normal">Beaucoup de nos frères et sœurs démarrent un projet loin de chez eux, sans réseau local, sans recommandations. </span><b data-i18n="statement_p1_bold">Un site clair peut remplacer, bi idhnillah, le bouche-à-oreille qu'on n'a pas encore.</b></p>
+      <p><span data-i18n="statement_p2_pre">Pas besoin d'un site compliqué. Besoin d'un site </span><b data-i18n="statement_p2_b">qui inspire confiance</b><span data-i18n="statement_p2_post"> et qui fonctionne dès le premier jour, in sha Allah.</span></p>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     OFFERS
-     ============================================================ -->
 <section class="offers" id="offres">
   <div class="wrap">
     <div class="offers-head reveal">
       <div>
-        <span class="eyebrow">Les offres</span>
-        <h2 class="section-title">Trois formats. Pas de sur-mesure interminable.</h2>
+        <span class="eyebrow" data-i18n="offers_eyebrow">Les offres</span>
+        <h2 class="section-title" data-i18n="offers_title">Trois formats. Pas de sur-mesure interminable.</h2>
       </div>
     </div>
 
@@ -590,120 +427,102 @@ h2.section-title{
       <article class="offer-card reveal">
         <div class="offer-head">
           <span class="offer-index">01</span>
-          <h3>Vitrine</h3>
+          <h3 data-i18n="offer1_title">Vitrine</h3>
         </div>
-        <p class="offer-desc">L'essentiel visible d'un coup d'œil : qui vous êtes, ce que vous faites, comment vous joindre.</p>
+        <p class="offer-desc" data-i18n="offer1_desc">L'essentiel visible d'un coup d'œil : qui vous êtes, ce que vous faites, comment vous joindre.</p>
         <ul class="offer-list">
-          <li>Une page, adaptée mobile</li>
-          <li>Bouton WhatsApp + Google Maps</li>
-          <li>Domaine + hébergement (1 an inclus)</li>
-          <li>2 tours de révisions</li>
+          <li data-i18n="offer1_li1">Une page, adaptée mobile</li>
+          <li data-i18n="offer1_li2">Bouton WhatsApp + Google Maps</li>
+          <li data-i18n="offer1_li3">Domaine + hébergement (1 an inclus)</li>
+          <li data-i18n="offer1_li4">2 tours de révisions</li>
         </ul>
         <div class="offer-foot">
-          <span class="offer-price"><span class="offer-from">dès</span>150&nbsp;€</span>
-          <span class="offer-delay">5 jours</span>
+          <span class="offer-price"><span class="offer-from" data-i18n="offer1_from">dès</span><span data-i18n="offer1_price">150&nbsp;€</span></span>
+          <span class="offer-delay" data-i18n="offer1_delay">5 jours</span>
         </div>
       </article>
 
       <article class="offer-card is-featured reveal">
         <div class="offer-head">
           <span class="offer-index">02</span>
-          <h3>Site complet</h3>
-          <span class="offer-tag">le plus choisi</span>
+          <h3 data-i18n="offer2_title">Site complet</h3>
+          <span class="offer-tag" data-i18n="offer2_tag">le plus choisi</span>
         </div>
-        <p class="offer-desc">Plusieurs pages, deux langues, de quoi présenter une activité en profondeur.</p>
+        <p class="offer-desc" data-i18n="offer2_desc">Plusieurs pages, deux langues, de quoi présenter une activité en profondeur.</p>
         <ul class="offer-list">
-          <li>4 à 6 pages, français + arabe</li>
-          <li>Formulaire de contact</li>
-          <li>Domaine + hébergement (1 an inclus)</li>
-          <li>3 tours de révisions</li>
+          <li data-i18n="offer2_li1">4 à 6 pages, français + arabe</li>
+          <li data-i18n="offer2_li2">Formulaire de contact</li>
+          <li data-i18n="offer2_li3">Domaine + hébergement (1 an inclus)</li>
+          <li data-i18n="offer2_li4">3 tours de révisions</li>
         </ul>
         <div class="offer-foot">
-          <span class="offer-price"><span class="offer-from">dès</span>400&nbsp;€</span>
-          <span class="offer-delay">10 jours</span>
+          <span class="offer-price"><span class="offer-from" data-i18n="offer2_from">dès</span><span data-i18n="offer2_price">400&nbsp;€</span></span>
+          <span class="offer-delay" data-i18n="offer2_delay">10 jours</span>
         </div>
       </article>
 
       <article class="offer-card reveal">
         <div class="offer-head">
           <span class="offer-index">03</span>
-          <h3>Boutique</h3>
+          <h3 data-i18n="offer3_title">Boutique</h3>
         </div>
-        <p class="offer-desc">Catalogue, commandes et paiement pour vendre directement en ligne.</p>
+        <p class="offer-desc" data-i18n="offer3_desc">Catalogue, commandes et paiement pour vendre directement en ligne.</p>
         <ul class="offer-list">
-          <li>Fiches produits illimitées</li>
-          <li>Commande et paiement en ligne</li>
-          <li>Domaine + hébergement (1 an inclus)</li>
-          <li>3 tours de révisions</li>
+          <li data-i18n="offer3_li1">Fiches produits illimitées</li>
+          <li data-i18n="offer3_li2">Commande et paiement en ligne</li>
+          <li data-i18n="offer3_li3">Domaine + hébergement (1 an inclus)</li>
+          <li data-i18n="offer3_li4">3 tours de révisions</li>
         </ul>
         <div class="offer-foot">
-          <span class="offer-price"><span class="offer-from">dès</span>800&nbsp;€</span>
-          <span class="offer-delay">21 jours</span>
+          <span class="offer-price"><span class="offer-from" data-i18n="offer3_from">dès</span><span data-i18n="offer3_price">800&nbsp;€</span></span>
+          <span class="offer-delay" data-i18n="offer3_delay">21 jours</span>
         </div>
       </article>
     </div>
 
-    <p class="offers-note reveal">Maintenance et hébergement à partir de la 2ᵉ année : 15&nbsp;€/mois. Logo, rédaction et retouche photo sur devis séparé.</p>
+    <p class="offers-note reveal" data-i18n="offers_note">Maintenance et hébergement à partir de la 2ᵉ année : 15&nbsp;€/mois. Logo, rédaction et retouche photo sur devis séparé.</p>
   </div>
 </section>
 
-<!-- ============================================================
-     METHOD
-     ============================================================ -->
 <section class="method" id="methode">
   <div class="wrap">
     <div class="method-grid">
       <div class="reveal">
-        <span class="eyebrow">La méthode</span>
-        <h2 class="section-title">Quatre étapes, dans cet ordre, sans exception.</h2>
-        <p class="method-lede">Une méthode simple, tenue avec sérieux — pour que le travail soit fait avec soin, du début à la fin, in sha Allah.</p>
+        <span class="eyebrow" data-i18n="method_eyebrow">La méthode</span>
+        <h2 class="section-title" data-i18n="method_title">Quatre étapes, dans cet ordre, sans exception.</h2>
+        <p class="method-lede" data-i18n="method_lede">Une méthode simple, tenue avec sérieux — pour que le travail soit fait avec soin, du début à la fin, in sha Allah.</p>
       </div>
 
       <ol class="method-list">
         <li class="method-step reveal">
           <span class="step-num">01</span>
-          <div>
-            <h3>On se parle</h3>
-            <p>Un questionnaire rapide sur votre activité. Un devis écrit sous 24h, prix et délai fixés.</p>
-          </div>
+          <div><h3 data-i18n="method1_title">On se parle</h3><p data-i18n="method1_desc">Un questionnaire rapide sur votre activité. Un devis écrit sous 24h, prix et délai fixés.</p></div>
         </li>
         <li class="method-step reveal">
           <span class="step-num">02</span>
-          <div>
-            <h3>Vous validez</h3>
-            <p>Acompte de 50&nbsp;%. Vous m'envoyez vos textes, photos et logo via une checklist simple.</p>
-          </div>
+          <div><h3 data-i18n="method2_title">Vous validez</h3><p data-i18n="method2_desc">Acompte de 50 %. Vous m'envoyez vos textes, photos et logo via une checklist simple.</p></div>
         </li>
         <li class="method-step reveal">
           <span class="step-num">03</span>
-          <div>
-            <h3>Je construis</h3>
-            <p>Développement, puis un ou deux tours de révisions groupées — pas de va-et-vient sans fin.</p>
-          </div>
+          <div><h3 data-i18n="method3_title">Je construis</h3><p data-i18n="method3_desc">Développement, puis un ou deux tours de révisions groupées — pas de va-et-vient sans fin.</p></div>
         </li>
         <li class="method-step reveal">
           <span class="step-num">04</span>
-          <div>
-            <h3>Vous êtes en ligne</h3>
-            <p>Solde réglé, mise en ligne, courte vidéo pour tout modifier vous-même par la suite.</p>
-          </div>
+          <div><h3 data-i18n="method4_title">Vous êtes en ligne</h3><p data-i18n="method4_desc">Solde réglé, mise en ligne, courte vidéo pour tout modifier vous-même par la suite.</p></div>
         </li>
       </ol>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     BILINGUAL / RTL DEMO
-     ============================================================ -->
 <section class="bilingual">
   <div class="wrap">
     <div class="bilingual-grid">
       <div class="bilingual-copy reveal">
-        <span class="eyebrow">Le bilingue, bien fait</span>
-        <h2 class="section-title">Le même site, dans les deux sens.</h2>
-        <p>Al hamdulillah, la mise en page se retourne entièrement pour l'arabe : navigation, alignement du texte, sens de lecture. Pas une traduction posée sur un gabarit français.</p>
-        <div class="lang-switch" role="group" aria-label="Changer la langue de l'aperçu">
+        <span class="eyebrow" data-i18n="bilingual_eyebrow">Le bilingue, bien fait</span>
+        <h2 class="section-title" data-i18n="bilingual_title">Le même site, dans les deux sens.</h2>
+        <p data-i18n="bilingual_p">Al hamdulillah, la mise en page se retourne entièrement pour l'arabe : navigation, alignement du texte, sens de lecture. Pas une traduction posée sur un gabarit français.</p>
+        <div class="lang-switch" id="demoLangSwitch" role="group" aria-label="Changer la langue de l'aperçu">
           <button class="lang-btn is-active" data-lang="fr" type="button">Français</button>
           <button class="lang-btn" data-lang="ar" type="button">العربية</button>
         </div>
@@ -729,72 +548,63 @@ h2.section-title{
   </div>
 </section>
 
-<!-- ============================================================
-     WORK / REALISATIONS
-     ============================================================ -->
 <section class="work" id="realisations">
   <div class="wrap">
     <div class="reveal">
-      <span class="eyebrow">Le meilleur exemple</span>
-      <h2 class="section-title">Mon propre site en dit plus que n'importe quelle maquette.</h2>
+      <span class="eyebrow" data-i18n="work_eyebrow">Le meilleur exemple</span>
+      <h2 class="section-title" data-i18n="work_title">Mon propre site en dit plus que n'importe quelle maquette.</h2>
     </div>
 
     <a class="portfolio-card reveal" href="https://matteopadalino.dev" target="_blank" rel="noopener">
       <div class="portfolio-card-inner">
         <div>
-          <span class="portfolio-label">Portfolio personnel</span>
+          <span class="portfolio-label" data-i18n="portfolio_label">Portfolio personnel</span>
           <span class="portfolio-url">matteopadalino.dev</span>
         </div>
         <span class="portfolio-arrow" aria-hidden="true">→</span>
       </div>
     </a>
-    <p class="work-note reveal">Si celui-ci vous inspire confiance, le vôtre le fera aussi, in sha Allah.</p>
+    <p class="work-note reveal" data-i18n="work_note">Si celui-ci vous inspire confiance, le vôtre le fera aussi, in sha Allah.</p>
   </div>
 </section>
 
-<!-- ============================================================
-     FAQ
-     ============================================================ -->
 <section class="faq wrap" id="faq">
   <div class="reveal">
-    <span class="eyebrow">Questions fréquentes</span>
-    <h2 class="section-title">Ce qu'on me demande le plus.</h2>
+    <span class="eyebrow" data-i18n="faq_eyebrow">Questions fréquentes</span>
+    <h2 class="section-title" data-i18n="faq_title">Ce qu'on me demande le plus.</h2>
   </div>
 
   <div class="faq-list">
     <details class="faq-item reveal">
-      <summary>Comment fonctionne l'acompte&nbsp;?<span class="faq-icon" aria-hidden="true"></span></summary>
-      <p>La moitié du prix est demandée à la commande, l'autre moitié à la livraison. Ça protège les deux côtés : vous savez que je m'engage, je sais que le projet est sérieux.</p>
+      <summary><span data-i18n="faq1_q">Comment fonctionne l'acompte ?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+      <p data-i18n="faq1_a">La moitié du prix est demandée à la commande, l'autre moitié à la livraison. Ça protège les deux côtés : vous savez que je m'engage, je sais que le projet est sérieux.</p>
     </details>
     <details class="faq-item reveal">
-      <summary>Combien de temps avant d'être en ligne&nbsp;?<span class="faq-icon" aria-hidden="true"></span></summary>
-      <p>Le délai démarre une fois l'acompte réglé et tous vos éléments (textes, photos, logo) reçus. Comptez 5 à 21 jours selon l'offre.</p>
+      <summary><span data-i18n="faq2_q">Combien de temps avant d'être en ligne ?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+      <p data-i18n="faq2_a">Le délai démarre une fois l'acompte réglé et tous vos éléments (textes, photos, logo) reçus. Comptez 5 à 21 jours selon l'offre.</p>
     </details>
     <details class="faq-item reveal">
-      <summary>Et si je veux changer des choses après&nbsp;?<span class="faq-icon" aria-hidden="true"></span></summary>
-      <p>Chaque offre inclut 2 à 3 tours de révisions groupées. Au-delà, chaque tour supplémentaire est facturé séparément, à prix fixe.</p>
+      <summary><span data-i18n="faq3_q">Et si je veux changer des choses après ?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+      <p data-i18n="faq3_a">Chaque offre inclut 2 à 3 tours de révisions groupées. Au-delà, chaque tour supplémentaire est facturé séparément, à prix fixe.</p>
     </details>
     <details class="faq-item reveal">
-      <summary>Qui gère l'hébergement et le nom de domaine&nbsp;?<span class="faq-icon" aria-hidden="true"></span></summary>
-      <p>Tout est inclus la première année. Ensuite, un abonnement de maintenance couvre l'hébergement, le domaine et les petites modifications.</p>
+      <summary><span data-i18n="faq4_q">Qui gère l'hébergement et le nom de domaine ?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+      <p data-i18n="faq4_a">Tout est inclus la première année. Ensuite, un abonnement de maintenance couvre l'hébergement, le domaine et les petites modifications.</p>
     </details>
     <details class="faq-item reveal">
-      <summary>Le site m'appartient-il vraiment&nbsp;?<span class="faq-icon" aria-hidden="true"></span></summary>
-      <p>Oui. Le nom de domaine est enregistré à votre nom, et vous recevez tous les accès une fois le solde réglé.</p>
+      <summary><span data-i18n="faq5_q">Le site m'appartient-il vraiment ?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+      <p data-i18n="faq5_a">Oui. Le nom de domaine est enregistré à votre nom, et vous recevez tous les accès une fois le solde réglé.</p>
     </details>
   </div>
 </section>
 
-<!-- ============================================================
-     CONTACT
-     ============================================================ -->
 <section class="contact">
   <div class="wrap">
-    <h2 class="reveal">On en parle, in sha Allah&nbsp;?</h2>
-    <p class="reveal">Une question, un projet en tête — écrivez-moi directement. Qu'Allah facilite, réponse rapide garantie.</p>
+    <h2 class="reveal" data-i18n="contact_title">On en parle, in sha Allah&nbsp;?</h2>
+    <p class="reveal" data-i18n="contact_p">Une question, un projet en tête — écrivez-moi directement. Qu'Allah facilite, réponse rapide garantie.</p>
     <div class="contact-actions reveal">
-      <a class="btn btn-solid" href="https://wa.me/33000000000" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="btn btn-ghost" href="https://t.me/itqan_studio" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn-solid" href="https://wa.me/33667727557" target="_blank" rel="noopener" data-i18n="contact_whatsapp">WhatsApp</a>
+      <a class="btn btn-ghost" href="https://t.me/abu_meymey" target="_blank" rel="noopener" data-i18n="contact_telegram">Telegram</a>
     </div>
   </div>
 </section>
@@ -807,8 +617,8 @@ h2.section-title{
       <rect class="sq1" x="8.6" y="8.6" width="14.8" height="14.8"/>
       <rect class="sq2" x="8.6" y="8.6" width="14.8" height="14.8" transform="rotate(45 16 16)"/>
     </svg>
-    <span class="footer-copy">© Itqan Studio — Devis gratuit, sans engagement. Baraka Allahu fikoum.</span>
-    <span class="footer-tag">FR / عربي</span>
+    <span class="footer-copy" data-i18n="footer_copy">© Itqan Studio — Devis gratuit, sans engagement. Baraka Allahu fikoum.</span>
+    <span class="footer-tag">FR / AR</span>
   </div>
 </footer>
 
@@ -817,10 +627,264 @@ h2.section-title{
 <script>
 (function(){
   "use strict";
+
+  var translations = {
+    fr: {
+      page_title: "Itqan Studio — Des sites web faits comme il faut",
+      page_desc: "Itqan Studio conçoit des sites vitrines, complets et boutiques pour les commerces et projets qui s'installent loin de chez eux. Bilingue français / arabe, prix fixe, délai tenu.",
+      skip_link: "Aller au contenu",
+      nav_offers: "Offres", nav_method: "Méthode", nav_work: "Réalisations", nav_faq: "FAQ", nav_cta: "Écrire sur WhatsApp",
+      hero_eyebrow: "Sites web sur mesure",
+      hero_title_1: "Deux carrés.", hero_title_2a: "Un seul angle ", hero_title_2b: "juste.",
+      hero_lede: "As-salamu alaykum. Itqan Studio construit, bi idhnillah, des sites clairs et rapides pour les commerces et les projets qui s'installent loin de chez eux. Prix fixé avant de commencer, délai tenu — en français comme en arabe.",
+      hero_cta_primary: "Demander un devis", hero_cta_secondary: "Voir la méthode",
+      statement_quote: "« Un commerce qu'on ne trouve pas sur Google n'existe pas vraiment. »",
+      statement_p1_normal: "Beaucoup de nos frères et sœurs démarrent un projet loin de chez eux, sans réseau local, sans recommandations. ",
+      statement_p1_bold: "Un site clair peut remplacer, bi idhnillah, le bouche-à-oreille qu'on n'a pas encore.",
+      statement_p2_pre: "Pas besoin d'un site compliqué. Besoin d'un site ",
+      statement_p2_b: "qui inspire confiance",
+      statement_p2_post: " et qui fonctionne dès le premier jour, in sha Allah.",
+      offers_eyebrow: "Les offres", offers_title: "Trois formats. Pas de sur-mesure interminable.",
+      offer1_title: "Vitrine", offer1_desc: "L'essentiel visible d'un coup d'œil : qui vous êtes, ce que vous faites, comment vous joindre.",
+      offer1_li1: "Une page, adaptée mobile", offer1_li2: "Bouton WhatsApp + Google Maps", offer1_li3: "Domaine + hébergement (1 an inclus)", offer1_li4: "2 tours de révisions",
+      offer1_from: "dès", offer1_price: "150 €", offer1_delay: "5 jours",
+      offer2_tag: "le plus choisi", offer2_title: "Site complet", offer2_desc: "Plusieurs pages, deux langues, de quoi présenter une activité en profondeur.",
+      offer2_li1: "4 à 6 pages, français + arabe", offer2_li2: "Formulaire de contact", offer2_li3: "Domaine + hébergement (1 an inclus)", offer2_li4: "3 tours de révisions",
+      offer2_from: "dès", offer2_price: "400 €", offer2_delay: "10 jours",
+      offer3_title: "Boutique", offer3_desc: "Catalogue, commandes et paiement pour vendre directement en ligne.",
+      offer3_li1: "Fiches produits illimitées", offer3_li2: "Commande et paiement en ligne", offer3_li3: "Domaine + hébergement (1 an inclus)", offer3_li4: "3 tours de révisions",
+      offer3_from: "dès", offer3_price: "800 €", offer3_delay: "21 jours",
+      offers_note: "Maintenance et hébergement à partir de la 2ᵉ année : 15 €/mois. Logo, rédaction et retouche photo sur devis séparé.",
+      method_eyebrow: "La méthode", method_title: "Quatre étapes, dans cet ordre, sans exception.",
+      method_lede: "Une méthode simple, tenue avec sérieux — pour que le travail soit fait avec soin, du début à la fin, in sha Allah.",
+      method1_title: "On se parle", method1_desc: "Un questionnaire rapide sur votre activité. Un devis écrit sous 24h, prix et délai fixés.",
+      method2_title: "Vous validez", method2_desc: "Acompte de 50 %. Vous m'envoyez vos textes, photos et logo via une checklist simple.",
+      method3_title: "Je construis", method3_desc: "Développement, puis un ou deux tours de révisions groupées — pas de va-et-vient sans fin.",
+      method4_title: "Vous êtes en ligne", method4_desc: "Solde réglé, mise en ligne, courte vidéo pour tout modifier vous-même par la suite.",
+      bilingual_eyebrow: "Le bilingue, bien fait", bilingual_title: "Le même site, dans les deux sens.",
+      bilingual_p: "Al hamdulillah, la mise en page se retourne entièrement pour l'arabe : navigation, alignement du texte, sens de lecture. Pas une traduction posée sur un gabarit français.",
+      bilingual_demo_aria: "Changer la langue de l'aperçu",
+      work_eyebrow: "Le meilleur exemple", work_title: "Mon propre site en dit plus que n'importe quelle maquette.",
+      portfolio_label: "Portfolio personnel", work_note: "Si celui-ci vous inspire confiance, le vôtre le fera aussi, in sha Allah.",
+      faq_eyebrow: "Questions fréquentes", faq_title: "Ce qu'on me demande le plus.",
+      faq1_q: "Comment fonctionne l'acompte ?", faq1_a: "La moitié du prix est demandée à la commande, l'autre moitié à la livraison. Ça protège les deux côtés : vous savez que je m'engage, je sais que le projet est sérieux.",
+      faq2_q: "Combien de temps avant d'être en ligne ?", faq2_a: "Le délai démarre une fois l'acompte réglé et tous vos éléments (textes, photos, logo) reçus. Comptez 5 à 21 jours selon l'offre.",
+      faq3_q: "Et si je veux changer des choses après ?", faq3_a: "Chaque offre inclut 2 à 3 tours de révisions groupées. Au-delà, chaque tour supplémentaire est facturé séparément, à prix fixe.",
+      faq4_q: "Qui gère l'hébergement et le nom de domaine ?", faq4_a: "Tout est inclus la première année. Ensuite, un abonnement de maintenance couvre l'hébergement, le domaine et les petites modifications.",
+      faq5_q: "Le site m'appartient-il vraiment ?", faq5_a: "Oui. Le nom de domaine est enregistré à votre nom, et vous recevez tous les accès une fois le solde réglé.",
+      contact_title: "On en parle, in sha Allah ?", contact_p: "Une question, un projet en tête — écrivez-moi directement. Qu'Allah facilite, réponse rapide garantie.",
+      contact_whatsapp: "WhatsApp", contact_telegram: "Telegram",
+      footer_copy: "© Itqan Studio — Devis gratuit, sans engagement. Baraka Allahu fikoum.",
+      lang_select_aria: "Changer la langue du site", nav_toggle_aria: "Ouvrir le menu"
+    },
+    en: {
+      page_title: "Itqan Studio — Websites built to last",
+      page_desc: "Itqan Studio designs showcase, full and store websites for businesses and projects starting over far from home. Bilingual French / Arabic, fixed price, deadline kept.",
+      skip_link: "Skip to content",
+      nav_offers: "Packages", nav_method: "Process", nav_work: "Work", nav_faq: "FAQ", nav_cta: "Message on WhatsApp",
+      hero_eyebrow: "Custom-built websites",
+      hero_title_1: "Two squares.", hero_title_2a: "One ", hero_title_2b: "exact angle.",
+      hero_lede: "As-salamu alaykum. Itqan Studio builds, bi idhnillah, clear and fast websites for businesses and projects starting over far from home. Price fixed before we begin, deadline kept — in French as in Arabic.",
+      hero_cta_primary: "Request a quote", hero_cta_secondary: "See the process",
+      statement_quote: "\u201cA business no one can find on Google doesn't really exist.\u201d",
+      statement_p1_normal: "Many of our brothers and sisters start a project far from home, with no local network, no word of mouth yet. ",
+      statement_p1_bold: "A clear website can replace, bi idhnillah, the recommendations you don't have yet.",
+      statement_p2_pre: "You don't need a complicated website. You need one ",
+      statement_p2_b: "that builds trust",
+      statement_p2_post: " and works from day one, in sha Allah.",
+      offers_eyebrow: "Packages", offers_title: "Three formats. No endless custom scoping.",
+      offer1_title: "Showcase", offer1_desc: "The essentials at a glance: who you are, what you do, how to reach you.",
+      offer1_li1: "One page, mobile-friendly", offer1_li2: "WhatsApp button + Google Maps", offer1_li3: "Domain + hosting (1 year included)", offer1_li4: "2 rounds of revisions",
+      offer1_from: "from", offer1_price: "€150", offer1_delay: "5 days",
+      offer2_tag: "most popular", offer2_title: "Full website", offer2_desc: "Several pages, two languages — enough room to present a business in depth.",
+      offer2_li1: "4 to 6 pages, French + Arabic", offer2_li2: "Contact form", offer2_li3: "Domain + hosting (1 year included)", offer2_li4: "3 rounds of revisions",
+      offer2_from: "from", offer2_price: "€400", offer2_delay: "10 days",
+      offer3_title: "Online store", offer3_desc: "Catalogue, orders and payment to sell directly online.",
+      offer3_li1: "Unlimited product pages", offer3_li2: "Online ordering and payment", offer3_li3: "Domain + hosting (1 year included)", offer3_li4: "3 rounds of revisions",
+      offer3_from: "from", offer3_price: "€800", offer3_delay: "21 days",
+      offers_note: "Maintenance and hosting from year 2 onward: €15/month. Logo, copywriting and photo retouching quoted separately.",
+      method_eyebrow: "The process", method_title: "Four steps, in this order, no exceptions.",
+      method_lede: "A simple method, followed seriously — so the work is done with care, start to finish, in sha Allah.",
+      method1_title: "We talk", method1_desc: "A quick questionnaire about your business. A written quote within 24h, price and deadline fixed.",
+      method2_title: "You confirm", method2_desc: "50% deposit. You send me your text, photos and logo through a simple checklist.",
+      method3_title: "I build", method3_desc: "Development, then one or two grouped rounds of revisions — no endless back and forth.",
+      method4_title: "You're live", method4_desc: "Balance settled, site launched, short video so you can edit everything yourself afterward.",
+      bilingual_eyebrow: "Bilingual, done right", bilingual_title: "The same site, both ways.",
+      bilingual_p: "Al hamdulillah, the layout fully flips for Arabic: navigation, text alignment, reading direction. Not a translation dropped onto a French template.",
+      bilingual_demo_aria: "Change the preview language",
+      work_eyebrow: "The best example", work_title: "My own website says more than any mockup.",
+      portfolio_label: "Personal portfolio", work_note: "If this one earns your trust, yours will too, in sha Allah.",
+      faq_eyebrow: "Frequently asked", faq_title: "What people ask me most.",
+      faq1_q: "How does the deposit work?", faq1_a: "Half the price is due at order, the other half at delivery. It protects both sides: you know I'm committed, I know the project is serious.",
+      faq2_q: "How long until I'm online?", faq2_a: "The clock starts once the deposit is paid and all your materials (text, photos, logo) are received. Expect 5 to 21 days depending on the package.",
+      faq3_q: "What if I want changes afterward?", faq3_a: "Each package includes 2 to 3 grouped rounds of revisions. Beyond that, each extra round is billed separately, at a fixed price.",
+      faq4_q: "Who manages hosting and the domain name?", faq4_a: "Everything is included the first year. After that, a maintenance subscription covers hosting, the domain, and small edits.",
+      faq5_q: "Do I actually own the site?", faq5_a: "Yes. The domain name is registered in your name, and you receive full access once the balance is settled.",
+      contact_title: "Shall we talk, in sha Allah?", contact_p: "A question, a project in mind — write to me directly. May Allah make it easy, quick reply guaranteed.",
+      contact_whatsapp: "WhatsApp", contact_telegram: "Telegram",
+      footer_copy: "© Itqan Studio — Free quote, no commitment. Baraka Allahu fikoum.",
+      lang_select_aria: "Change site language", nav_toggle_aria: "Open menu"
+    },
+    ar: {
+      page_title: "استوديو إتقان — مواقع ويب مُتقنة الصنع",
+      page_desc: "استوديو إتقان يصمم مواقع تعريفية ومتكاملة ومتاجر إلكترونية للتجارات والمشاريع التي تبدأ من جديد بعيدًا عن الوطن. ثنائي اللغة فرنسي/عربي، سعر ثابت، والتزام بالموعد.",
+      skip_link: "الانتقال إلى المحتوى",
+      nav_offers: "الباقات", nav_method: "طريقة العمل", nav_work: "أعمالي", nav_faq: "الأسئلة الشائعة", nav_cta: "راسلني على واتساب",
+      hero_eyebrow: "مواقع ويب مصممة خصيصًا",
+      hero_title_1: "مربّعان.", hero_title_2a: "بزاوية ", hero_title_2b: "واحدة دقيقة.",
+      hero_lede: "السلام عليكم. استوديو إتقان يبني، بإذن الله، مواقع واضحة وسريعة للمشاريع والتجارات التي تبدأ من جديد بعيدًا عن الوطن. السعر يُحدَّد قبل البدء، والموعد يُحترم — بالفرنسية كما بالعربية.",
+      hero_cta_primary: "اطلب عرض سعر", hero_cta_secondary: "شاهد طريقة العمل",
+      statement_quote: "«التجارة التي لا تُوجد على جوجل لا وجود حقيقيًا لها.»",
+      statement_p1_normal: "كثير من إخواننا وأخواتنا يبدأون مشروعًا بعيدًا عن بلدهم، بلا شبكة معارف محلية، وبلا توصيات بعد. ",
+      statement_p1_bold: "موقع واضح يمكن أن يعوّض، بإذن الله، التوصيات التي لم تصلك بعد.",
+      statement_p2_pre: "لست بحاجة إلى موقع معقّد. أنت بحاجة إلى موقع ",
+      statement_p2_b: "يبعث على الثقة",
+      statement_p2_post: " ويعمل منذ اليوم الأول، إن شاء الله.",
+      offers_eyebrow: "الباقات", offers_title: "ثلاث صيغ واضحة، بلا تخصيص لا نهاية له.",
+      offer1_title: "موقع تعريفي", offer1_desc: "الأساسيات في لمحة واحدة: من أنت، ماذا تقدّم، وكيف يتم التواصل معك.",
+      offer1_li1: "صفحة واحدة، متوافقة مع الجوال", offer1_li2: "زر واتساب + خرائط جوجل", offer1_li3: "اسم النطاق + الاستضافة (سنة كاملة)", offer1_li4: "جولتان من التعديلات",
+      offer1_from: "ابتداءً من", offer1_price: "150 €", offer1_delay: "5 أيام",
+      offer2_tag: "الأكثر اختيارًا", offer2_title: "موقع متكامل", offer2_desc: "عدة صفحات، بلغتين، مساحة كافية لتقديم نشاطك بتفصيل أكبر.",
+      offer2_li1: "4 إلى 6 صفحات، بالفرنسية والعربية", offer2_li2: "نموذج تواصل", offer2_li3: "اسم النطاق + الاستضافة (سنة كاملة)", offer2_li4: "3 جولات من التعديلات",
+      offer2_from: "ابتداءً من", offer2_price: "400 €", offer2_delay: "10 أيام",
+      offer3_title: "متجر إلكتروني", offer3_desc: "كتالوج، طلبات، ودفع إلكتروني للبيع مباشرة عبر الإنترنت.",
+      offer3_li1: "عدد غير محدود من صفحات المنتجات", offer3_li2: "طلب ودفع إلكتروني", offer3_li3: "اسم النطاق + الاستضافة (سنة كاملة)", offer3_li4: "3 جولات من التعديلات",
+      offer3_from: "ابتداءً من", offer3_price: "800 €", offer3_delay: "21 يومًا",
+      offers_note: "الصيانة والاستضافة ابتداءً من السنة الثانية: 15 € شهريًا. الشعار وكتابة النصوص وتعديل الصور يُحسب في عرض سعر منفصل.",
+      method_eyebrow: "طريقة العمل", method_title: "أربع خطوات، بهذا الترتيب، دون استثناء.",
+      method_lede: "طريقة بسيطة، تُتَّبع بجدّية — ليكون العمل متقنًا من البداية إلى النهاية، إن شاء الله.",
+      method1_title: "نتحدث", method1_desc: "استبيان سريع عن نشاطك. عرض سعر مكتوب خلال 24 ساعة، بسعر وموعد محدَّدين.",
+      method2_title: "توافق", method2_desc: "عربون 50%. ترسل لي نصوصك وصورك وشعارك عبر قائمة بسيطة.",
+      method3_title: "أبني الموقع", method3_desc: "التطوير، ثم جولة أو جولتان من التعديلات المجمَّعة — بلا تراسل لا ينتهي.",
+      method4_title: "موقعك جاهز", method4_desc: "تسديد الباقي، إطلاق الموقع، وفيديو قصير لتتمكّن من التعديل بنفسك لاحقًا.",
+      bilingual_eyebrow: "ثنائية اللغة، كما يجب", bilingual_title: "نفس الموقع، بالاتجاهين.",
+      bilingual_p: "الحمد لله، التصميم ينقلب بالكامل للعربية: التنقل، محاذاة النص، اتجاه القراءة. ليست ترجمة موضوعة فوق قالب فرنسي.",
+      bilingual_demo_aria: "تغيير لغة المعاينة",
+      work_eyebrow: "أفضل مثال", work_title: "موقعي الخاص يقول أكثر من أي نموذج تجريبي.",
+      portfolio_label: "الملف الشخصي", work_note: "إن كان هذا الموقع يمنحك الثقة، فموقعك سيفعل ذلك أيضًا، إن شاء الله.",
+      faq_eyebrow: "الأسئلة الشائعة", faq_title: "الأسئلة التي أتلقاها أكثر.",
+      faq1_q: "كيف يعمل نظام العربون؟", faq1_a: "نصف السعر يُطلب عند الطلب، والنصف الآخر عند التسليم. هذا يحمي الطرفين: تعرف أنني ملتزم، وأعرف أن المشروع جاد.",
+      faq2_q: "كم من الوقت حتى يكون الموقع جاهزًا؟", faq2_a: "تبدأ المدة بمجرد تسديد العربون واستلام جميع عناصرك (النصوص، الصور، الشعار). احسب من 5 إلى 21 يومًا حسب الباقة.",
+      faq3_q: "ماذا لو أردت تغيير أشياء لاحقًا؟", faq3_a: "كل باقة تتضمن جولتين إلى ثلاث جولات من التعديلات المجمَّعة. وما بعد ذلك، تُحتسب كل جولة إضافية بسعر ثابت منفصل.",
+      faq4_q: "من يتولى الاستضافة واسم النطاق؟", faq4_a: "كل شيء مشمول في السنة الأولى. بعدها، اشتراك صيانة يغطي الاستضافة واسم النطاق والتعديلات الصغيرة.",
+      faq5_q: "هل الموقع ملكي فعلاً؟", faq5_a: "نعم. اسم النطاق مسجَّل باسمك، وتستلم كل الصلاحيات فور تسديد المبلغ المتبقي.",
+      contact_title: "نتحدث، إن شاء الله؟", contact_p: "سؤال، أو مشروع في بالك — راسلني مباشرة. أسأل الله أن ييسّر أمرك، والرد سريع مضمون.",
+      contact_whatsapp: "واتساب", contact_telegram: "تيليجرام",
+      footer_copy: "© استوديو إتقان — عرض سعر مجاني، بلا التزام. بارك الله فيكم.",
+      lang_select_aria: "تغيير لغة الموقع", nav_toggle_aria: "فتح القائمة"
+    },
+    ru: {
+      page_title: "Itqan Studio — Сайты, сделанные на совесть",
+      page_desc: "Itqan Studio создаёт сайты-визитки, полноценные сайты и интернет-магазины для тех, кто начинает дело заново вдали от родины. Билингвально, французский/арабский, фиксированная цена, соблюдение сроков.",
+      skip_link: "Перейти к содержимому",
+      nav_offers: "Тарифы", nav_method: "Как я работаю", nav_work: "Портфолио", nav_faq: "Вопросы", nav_cta: "Написать в WhatsApp",
+      hero_eyebrow: "Сайты на заказ",
+      hero_title_1: "Два квадрата.", hero_title_2a: "Один ", hero_title_2b: "точный угол.",
+      hero_lede: "Ассаляму алейкум. Itqan Studio создаёт, би-изни-Ллях, понятные и быстрые сайты для тех, кто начинает дело заново вдали от родины. Цена фиксируется заранее, сроки соблюдаются — на французском и на арабском.",
+      hero_cta_primary: "Запросить смету", hero_cta_secondary: "Как я работаю",
+      statement_quote: "«Бизнеса, которого нет в Google, на самом деле не существует».",
+      statement_p1_normal: "Многие из наших братьев и сестёр начинают дело вдали от дома — без местных связей, без сарафанного радио. ",
+      statement_p1_bold: "Понятный сайт может заменить, би-изни-Ллях, те рекомендации, которых пока нет.",
+      statement_p2_pre: "Не нужен сложный сайт. Нужен сайт, ",
+      statement_p2_b: "который вызывает доверие",
+      statement_p2_post: " и работает с первого дня, иншаАллах.",
+      offers_eyebrow: "Тарифы", offers_title: "Три формата. Никакой бесконечной кастомизации.",
+      offer1_title: "Визитка", offer1_desc: "Главное — с первого взгляда: кто вы, чем занимаетесь, как с вами связаться.",
+      offer1_li1: "Одна страница, адаптирована под телефон", offer1_li2: "Кнопка WhatsApp + Google Карты", offer1_li3: "Домен + хостинг (1 год включён)", offer1_li4: "2 раунда правок",
+      offer1_from: "от", offer1_price: "150 €", offer1_delay: "5 дней",
+      offer2_tag: "самый популярный", offer2_title: "Полный сайт", offer2_desc: "Несколько страниц, два языка — достаточно, чтобы подробно представить бизнес.",
+      offer2_li1: "4–6 страниц, французский + арабский", offer2_li2: "Форма обратной связи", offer2_li3: "Домен + хостинг (1 год включён)", offer2_li4: "3 раунда правок",
+      offer2_from: "от", offer2_price: "400 €", offer2_delay: "10 дней",
+      offer3_title: "Интернет-магазин", offer3_desc: "Каталог, заказы и оплата — чтобы продавать напрямую онлайн.",
+      offer3_li1: "Неограниченное число карточек товара", offer3_li2: "Онлайн-заказ и оплата", offer3_li3: "Домен + хостинг (1 год включён)", offer3_li4: "3 раунда правок",
+      offer3_from: "от", offer3_price: "800 €", offer3_delay: "21 день",
+      offers_note: "Обслуживание и хостинг со 2-го года: 15 €/мес. Логотип, тексты и обработка фото — отдельной сметой.",
+      method_eyebrow: "Как я работаю", method_title: "Четыре шага, именно в этом порядке.",
+      method_lede: "Простой метод, которого я строго придерживаюсь — чтобы работа была сделана аккуратно, от начала до конца, иншаАллах.",
+      method1_title: "Обсуждаем", method1_desc: "Короткая анкета о вашем деле. Письменная смета в течение 24 часов — цена и срок зафиксированы.",
+      method2_title: "Вы подтверждаете", method2_desc: "Предоплата 50%. Вы присылаете тексты, фото и логотип по простому чек-листу.",
+      method3_title: "Я делаю сайт", method3_desc: "Разработка, затем один-два сгруппированных раунда правок — без бесконечной переписки.",
+      method4_title: "Сайт запущен", method4_desc: "Остаток оплачен, сайт опубликован, короткое видео — чтобы вы сами могли всё менять дальше.",
+      bilingual_eyebrow: "Билингвальность как надо", bilingual_title: "Один и тот же сайт — в обе стороны.",
+      bilingual_p: "Альхамдулиллях, вёрстка полностью разворачивается для арабского: навигация, выравнивание текста, направление чтения. Это не перевод, наложенный на французский шаблон.",
+      bilingual_demo_aria: "Сменить язык предпросмотра",
+      work_eyebrow: "Лучший пример", work_title: "Мой собственный сайт говорит больше, чем любой макет.",
+      portfolio_label: "Личное портфолио", work_note: "Если этот сайт вызывает у вас доверие — ваш тоже вызовет, иншаАллах.",
+      faq_eyebrow: "Частые вопросы", faq_title: "О чём меня чаще всего спрашивают.",
+      faq1_q: "Как работает предоплата?", faq1_a: "Половина суммы — при заказе, вторая половина — при сдаче сайта. Это защищает обе стороны: вы знаете, что я обязался, а я знаю, что проект серьёзный.",
+      faq2_q: "Сколько времени до запуска?", faq2_a: "Отсчёт начинается после предоплаты и получения всех материалов (тексты, фото, логотип). От 5 до 21 дня, в зависимости от тарифа.",
+      faq3_q: "А если я захочу что-то изменить потом?", faq3_a: "В каждый тариф включено 2–3 сгруппированных раунда правок. Сверх этого — каждый дополнительный раунд оплачивается отдельно, по фиксированной цене.",
+      faq4_q: "Кто отвечает за хостинг и домен?", faq4_a: "Первый год всё включено. Затем абонемент на обслуживание покрывает хостинг, домен и мелкие правки.",
+      faq5_q: "Сайт действительно принадлежит мне?", faq5_a: "Да. Домен регистрируется на ваше имя, и вы получаете полный доступ сразу после оплаты остатка.",
+      contact_title: "Обсудим, иншаАллах?", contact_p: "Есть вопрос или идея проекта — напишите мне напрямую. Да облегчит Аллах — отвечаю быстро.",
+      contact_whatsapp: "WhatsApp", contact_telegram: "Telegram",
+      footer_copy: "© Itqan Studio — Бесплатная смета, никаких обязательств. Баракаллаху фикум.",
+      lang_select_aria: "Сменить язык сайта", nav_toggle_aria: "Открыть меню"
+    }
+  };
+
+  var currentLang = 'fr';
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hasGsap = typeof gsap !== 'undefined';
 
-  /* ---------- Nav scroll state ---------- */
+  function applyLanguage(lang){
+    var dict = translations[lang];
+    if(!dict) return;
+    currentLang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined) el.textContent = dict[key];
+    });
+
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    document.getElementById('pageTitle').textContent = dict.page_title;
+    document.getElementById('metaDesc').setAttribute('content', dict.page_desc);
+
+    var demoSwitch = document.getElementById('demoLangSwitch');
+    if(demoSwitch) demoSwitch.setAttribute('aria-label', dict.bilingual_demo_aria);
+
+    var navToggle = document.getElementById('navToggle');
+    if(navToggle) navToggle.setAttribute('aria-label', dict.nav_toggle_aria);
+
+    document.querySelectorAll('#langMenu li').forEach(function(li){
+      li.setAttribute('aria-selected', li.dataset.lang === lang ? 'true' : 'false');
+    });
+    document.getElementById('langCurrentLabel').textContent = lang.toUpperCase();
+    document.getElementById('langSelect').setAttribute('aria-label', dict.lang_select_aria);
+  }
+
+  var langSelect = document.getElementById('langSelect');
+  var langTrigger = document.getElementById('langTrigger');
+  var langMenu = document.getElementById('langMenu');
+
+  langTrigger.addEventListener('click', function(){
+    var open = langSelect.classList.toggle('is-open');
+    langTrigger.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', function(e){
+    if(!langSelect.contains(e.target)){
+      langSelect.classList.remove('is-open');
+      langTrigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      langSelect.classList.remove('is-open');
+      langTrigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+  langMenu.querySelectorAll('li').forEach(function(li){
+    li.addEventListener('click', function(){
+      applyLanguage(li.dataset.lang);
+      langSelect.classList.remove('is-open');
+      langTrigger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  applyLanguage('fr');
+
   var nav = document.getElementById('siteNav');
   function onScroll(){
     if(window.scrollY > 40){ nav.classList.add('is-scrolled'); }
@@ -829,17 +893,15 @@ h2.section-title{
   window.addEventListener('scroll', onScroll, { passive:true });
   onScroll();
 
-  /* ---------- Mobile nav toggle ---------- */
-  var navToggle = document.getElementById('navToggle');
+  var navToggleBtn = document.getElementById('navToggle');
   var navLinks = document.querySelector('.nav-links');
-  navToggle.addEventListener('click', function(){
+  navToggleBtn.addEventListener('click', function(){
     var open = navLinks.style.display === 'flex';
     navLinks.style.display = open ? 'none' : 'flex';
     navLinks.style.cssText += open ? '' : 'position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(14,36,29,0.97);padding:1.5rem;gap:1.25rem;';
-    navToggle.setAttribute('aria-expanded', String(!open));
+    navToggleBtn.setAttribute('aria-expanded', String(!open));
   });
 
-  /* ---------- Hero star parallax (mouse) ---------- */
   var parallax = document.getElementById('starParallax');
   if(!reduceMotion && parallax){
     var targetX = 0, targetY = 0, curX = 0, curY = 0;
@@ -856,7 +918,6 @@ h2.section-title{
     requestAnimationFrame(tick);
   }
 
-  /* ---------- Hero assembly animation ---------- */
   var heroActions = document.querySelectorAll('.hero-copy > *');
   if(hasGsap && !reduceMotion){
     gsap.set('#sq2', { transformOrigin:'50% 50%' });
@@ -873,7 +934,6 @@ h2.section-title{
     document.getElementById('sq2').setAttribute('transform', 'rotate(45 110 110)');
   }
 
-  /* ---------- Scroll reveals ---------- */
   var revealEls = document.querySelectorAll('.reveal');
   if(hasGsap && window.ScrollTrigger){
     gsap.registerPlugin(ScrollTrigger);
@@ -889,14 +949,12 @@ h2.section-title{
     }
   }
 
-  /* ---------- Bilingual / RTL toggle ---------- */
   var mockBrowser = document.getElementById('mockBrowser');
-  var langBtns = document.querySelectorAll('.lang-btn');
-  langBtns.forEach(function(btn){
+  var demoLangBtns = document.querySelectorAll('#demoLangSwitch .lang-btn');
+  demoLangBtns.forEach(function(btn){
     btn.addEventListener('click', function(){
       var lang = btn.dataset.lang;
-      langBtns.forEach(function(b){ b.classList.toggle('is-active', b === btn); });
-
+      demoLangBtns.forEach(function(b){ b.classList.toggle('is-active', b === btn); });
       mockBrowser.classList.add('is-flipping');
       setTimeout(function(){
         mockBrowser.dir = lang === 'ar' ? 'rtl' : 'ltr';
